@@ -1,0 +1,4 @@
+view "flywayapdev"."customers_customer_feedback_summary" {
+  text = select `c`.`CustomerID` AS `CustomerID`,`c`.`FirstName` AS `FirstName`,`c`.`LastName` AS `LastName`,avg(`f`.`Rating`) AS `AverageRating`,count(`f`.`FeedbackID`) AS `FeedbackCount` from (`customers_customer` `c` left join `customers_customer_feedback` `f` on((`c`.`CustomerID` = `f`.`CustomerID`))) group by `c`.`CustomerID`,`c`.`FirstName`,`c`.`LastName`
+}
+

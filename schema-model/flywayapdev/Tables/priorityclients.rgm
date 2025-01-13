@@ -1,0 +1,22 @@
+table "flywayapdev"."priorityclients" {
+  columns = (
+    column "FirstName" {
+      type = varchar(24)
+      null = NOT NULL
+    }
+    column "LastName" {
+      type = varchar(45)
+    }
+    column "ClientID" {
+      type = int
+    }
+  )
+  primaryKey = {
+    columns = [
+      FirstName
+    ]
+    name = "PRIMARY"
+    objectType = primaryKey
+  }
+}
+

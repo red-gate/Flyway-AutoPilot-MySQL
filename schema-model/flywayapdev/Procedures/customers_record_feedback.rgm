@@ -1,0 +1,29 @@
+procedure "flywayapdev"."customers_record_feedback" {
+  parameters = <
+    {
+      name = CustomerID
+      datatype = int
+      mode = IN
+    }
+
+    {
+      name = Rating
+      datatype = int
+      mode = IN
+    }
+
+    {
+      name = Comments
+      datatype = varchar(500)
+      mode = IN
+    }
+
+  >
+  text = """-
+BEGIN
+    INSERT INTO customers_customer_feedback (CustomerID, Rating, Comments)
+    VALUES (CustomerID, Rating, Comments);
+END
+"""
+}
+

@@ -1,0 +1,24 @@
+table "flywayapdev"."customers_loyalty_program" {
+  columns = (
+    column "ProgramID" {
+      type = int
+      null = NOT NULL
+    }
+    column "ProgramName" {
+      type = varchar(50)
+      null = NOT NULL
+    }
+    column "PointsMultiplier" {
+      type = decimal(3,2)
+      default = 1.00
+    }
+  )
+  primaryKey = {
+    columns = [
+      ProgramID
+    ]
+    name = "PRIMARY"
+    objectType = primaryKey
+  }
+}
+

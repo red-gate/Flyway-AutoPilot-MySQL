@@ -1,0 +1,37 @@
+table "flywayapdev"."sales_discount_code" {
+  columns = (
+    column "DiscountID" {
+      type = int
+      null = NOT NULL
+    }
+    column "Code" {
+      type = varchar(20)
+      null = NOT NULL
+    }
+    column "DiscountPercentage" {
+      type = decimal(4,2)
+    }
+    column "ExpiryDate" {
+      type = datetime
+    }
+  )
+  primaryKey = {
+    columns = [
+      DiscountID
+    ]
+    name = "PRIMARY"
+    objectType = primaryKey
+  }
+}
+
+index "flywayapdev"."sales_discount_code"."Code" {
+  columns = <
+    {
+      name = Code
+    }
+
+  >
+  type = BTREE
+  unique = UNIQUE
+}
+

@@ -1,0 +1,42 @@
+procedure "flywayapdev"."sales_apply_discount" {
+  parameters = <
+    {
+      name = OrderID
+      datatype = int
+      mode = IN
+    }
+
+    {
+      name = DiscountCode
+      datatype = varchar(20)
+      mode = IN
+    }
+
+  >
+  text = """-
+BEGIN
+    DECLARE DiscountID INT;
+    DECLARE DiscountPercentage DECIMAL(4, 2);
+    DECLARE ExpiryDate DATETIME;
+
+    SELECT 
+        DiscountID, DiscountPercentage, ExpiryDate
+    INTO DiscountID, DiscountPercentage, ExpiryDate
+    FROM sales_discount_code
+    WHERE Code = DiscountCode;
+
+    IF DiscountID IS NOT NULL AND ExpiryDate >= CURRENT_TIMESTAMP THEN
+        UPDATE sales_orders
+        SET TotalAmount = TotalAmount * (1 - DiscountPercentage / 100)
+        WHERE OrderID = OrderID;
+
+        INSERT INTO sales_order_audit_log (OrderID, ChangeDescription)
+        VALUES (OrderID, CONCAT('Discount ', DiscountCode, ' applied with ', DiscountPercentage, '% off.'));
+    ELSE
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Invalid or expired discount code.';
+    END IF;
+END
+"""
+}
+

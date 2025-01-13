@@ -1,0 +1,27 @@
+procedure "flywayapdev"."sales_get_customer_flight_history" {
+  parameters = <
+    {
+      name = CustomerID
+      datatype = int
+      mode = IN
+    }
+
+  >
+  text = """-
+BEGIN
+    SELECT 
+        o.OrderID,
+        f.Airline,
+        f.DepartureCity,
+        f.ArrivalCity,
+        o.OrderDate,
+        o.Status,
+        o.TotalAmount
+    FROM sales_orders o
+    JOIN inventory_flight f ON o.FlightID = f.FlightID
+    WHERE o.CustomerID = CustomerID
+    ORDER BY o.OrderDate;
+END
+"""
+}
+

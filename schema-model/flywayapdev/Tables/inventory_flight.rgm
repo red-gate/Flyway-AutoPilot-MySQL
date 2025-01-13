@@ -1,0 +1,44 @@
+table "flywayapdev"."inventory_flight" {
+  columns = (
+    column "FlightID" {
+      type = int
+      null = NOT NULL
+    }
+    column "Airline" {
+      type = varchar(50)
+      null = NOT NULL
+    }
+    column "DepartureCity" {
+      type = varchar(50)
+      null = NOT NULL
+    }
+    column "ArrivalCity" {
+      type = varchar(50)
+      null = NOT NULL
+    }
+    column "DepartureTime" {
+      type = datetime
+      null = NOT NULL
+    }
+    column "ArrivalTime" {
+      type = datetime
+      null = NOT NULL
+    }
+    column "Price" {
+      type = decimal(10,2)
+      null = NOT NULL
+    }
+    column "AvailableSeats" {
+      type = int
+      null = NOT NULL
+    }
+  )
+  primaryKey = {
+    columns = [
+      FlightID
+    ]
+    name = "PRIMARY"
+    objectType = primaryKey
+  }
+}
+

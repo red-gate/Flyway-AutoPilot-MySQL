@@ -1,0 +1,46 @@
+table "flywayapdev"."sales_order_audit_log" {
+  columns = (
+    column "AuditID" {
+      type = int
+      null = NOT NULL
+    }
+    column "OrderID" {
+      type = int
+    }
+    column "ChangeDate" {
+      type = datetime
+      default = CURRENT_TIMESTAMP
+    }
+    column "ChangeDescription" {
+      type = varchar(500)
+    }
+  )
+  primaryKey = {
+    columns = [
+      AuditID
+    ]
+    name = "PRIMARY"
+    objectType = primaryKey
+  }
+}
+
+foreignKey "flywayapdev"."sales_order_audit_log"."sales_order_audit_log_ibfk_1" {
+  columns = [
+    "OrderID"
+  ]
+  referencedTable = "flywayapdev"."sales_orders"
+  referencedColumns = [
+    "OrderID"
+  ]
+}
+
+index "flywayapdev"."sales_order_audit_log"."OrderID" {
+  columns = <
+    {
+      name = OrderID
+    }
+
+  >
+  type = BTREE
+}
+

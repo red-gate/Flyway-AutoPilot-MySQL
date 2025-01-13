@@ -1,0 +1,23 @@
+procedure "flywayapdev"."inventory_add_maintenance_log" {
+  parameters = <
+    {
+      name = FlightID
+      datatype = int
+      mode = IN
+    }
+
+    {
+      name = Description
+      datatype = varchar(500)
+      mode = IN
+    }
+
+  >
+  text = """-
+BEGIN
+    INSERT INTO inventory_maintenance_log (FlightID, Description, MaintenanceStatus)
+    VALUES (FlightID, Description, 'Pending');
+END
+"""
+}
+

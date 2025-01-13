@@ -1,0 +1,4 @@
+view "flywayapdev"."sales_customer_orders_view" {
+  text = select `c`.`CustomerID` AS `CustomerID`,`c`.`FirstName` AS `FirstName`,`c`.`LastName` AS `LastName`,`o`.`OrderID` AS `OrderID`,`o`.`OrderDate` AS `OrderDate`,`o`.`Status` AS `Status`,`o`.`TotalAmount` AS `TotalAmount` from (`customers_customer` `c` join `sales_orders` `o` on((`c`.`CustomerID` = `o`.`CustomerID`)))
+}
+

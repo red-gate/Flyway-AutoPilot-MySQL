@@ -1,0 +1,9 @@
+{
+  "database-engine": "mysql",
+  "database-properties": {
+    "database-version": "8.0.40",
+    "database-flavor": "mysql",
+    "model-version": "1.2"
+  },
+  "model-format": "rgmf"
+}

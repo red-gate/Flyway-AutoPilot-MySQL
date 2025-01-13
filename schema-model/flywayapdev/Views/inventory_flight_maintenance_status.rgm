@@ -1,0 +1,4 @@
+view "flywayapdev"."inventory_flight_maintenance_status" {
+  text = select `f`.`FlightID` AS `FlightID`,`f`.`Airline` AS `Airline`,`f`.`DepartureCity` AS `DepartureCity`,`f`.`ArrivalCity` AS `ArrivalCity`,count(`m`.`LogID`) AS `MaintenanceCount`,sum((case when (`m`.`MaintenanceStatus` = 'Completed') then 1 else 0 end)) AS `CompletedMaintenance` from (`inventory_flight` `f` left join `inventory_maintenance_log` `m` on((`f`.`FlightID` = `m`.`FlightID`))) group by `f`.`FlightID`,`f`.`Airline`,`f`.`DepartureCity`,`f`.`ArrivalCity`
+}
+

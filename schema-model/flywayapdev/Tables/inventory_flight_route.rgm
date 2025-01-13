@@ -1,0 +1,28 @@
+table "flywayapdev"."inventory_flight_route" {
+  columns = (
+    column "RouteID" {
+      type = int
+      null = NOT NULL
+    }
+    column "DepartureCity" {
+      type = varchar(50)
+      null = NOT NULL
+    }
+    column "ArrivalCity" {
+      type = varchar(50)
+      null = NOT NULL
+    }
+    column "Distance" {
+      type = int
+      null = NOT NULL
+    }
+  )
+  primaryKey = {
+    columns = [
+      RouteID
+    ]
+    name = "PRIMARY"
+    objectType = primaryKey
+  }
+}
+

@@ -1,0 +1,24 @@
+procedure "flywayapdev"."inventory_update_available_seats" {
+  parameters = <
+    {
+      name = FlightID
+      datatype = int
+      mode = IN
+    }
+
+    {
+      name = SeatChange
+      datatype = int
+      mode = IN
+    }
+
+  >
+  text = """-
+BEGIN
+    UPDATE inventory_flight
+    SET AvailableSeats = AvailableSeats + SeatChange
+    WHERE FlightID = FlightID;
+END
+"""
+}
+

@@ -1,0 +1,76 @@
+table "flywayapdev"."sales_orders" {
+  columns = (
+    column "OrderID" {
+      type = int
+      null = NOT NULL
+    }
+    column "CustomerID" {
+      type = int
+    }
+    column "FlightID" {
+      type = int
+    }
+    column "OrderDate" {
+      type = datetime
+      default = CURRENT_TIMESTAMP
+    }
+    column "Status" {
+      type = varchar(20)
+      default = 'Pending'
+    }
+    column "TotalAmount" {
+      type = decimal(10,2)
+    }
+    column "TicketQuantity" {
+      type = int
+    }
+  )
+  primaryKey = {
+    columns = [
+      OrderID
+    ]
+    name = "PRIMARY"
+    objectType = primaryKey
+  }
+}
+
+foreignKey "flywayapdev"."sales_orders"."sales_orders_ibfk_1" {
+  columns = [
+    "CustomerID"
+  ]
+  referencedTable = "flywayapdev"."customers_customer"
+  referencedColumns = [
+    "CustomerID"
+  ]
+}
+
+foreignKey "flywayapdev"."sales_orders"."sales_orders_ibfk_2" {
+  columns = [
+    "FlightID"
+  ]
+  referencedTable = "flywayapdev"."inventory_flight"
+  referencedColumns = [
+    "FlightID"
+  ]
+}
+
+index "flywayapdev"."sales_orders"."CustomerID" {
+  columns = <
+    {
+      name = CustomerID
+    }
+
+  >
+  type = BTREE
+}
+
+index "flywayapdev"."sales_orders"."FlightID" {
+  columns = <
+    {
+      name = FlightID
+    }
+
+  >
+  type = BTREE
+}
+

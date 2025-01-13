@@ -1,0 +1,24 @@
+procedure "flywayapdev"."sales_update_order_status" {
+  parameters = <
+    {
+      name = OrderID
+      datatype = int
+      mode = IN
+    }
+
+    {
+      name = NewStatus
+      datatype = varchar(20)
+      mode = IN
+    }
+
+  >
+  text = """-
+BEGIN
+    UPDATE sales_orders
+    SET Status = NewStatus
+    WHERE OrderID = OrderID;
+END
+"""
+}
+

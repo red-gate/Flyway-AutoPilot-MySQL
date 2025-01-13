@@ -1,0 +1,50 @@
+table "flywayapdev"."inventory_maintenance_log" {
+  columns = (
+    column "LogID" {
+      type = int
+      null = NOT NULL
+    }
+    column "FlightID" {
+      type = int
+    }
+    column "MaintenanceDate" {
+      type = datetime
+      default = CURRENT_TIMESTAMP
+    }
+    column "Description" {
+      type = varchar(500)
+    }
+    column "MaintenanceStatus" {
+      type = varchar(20)
+      default = 'Pending'
+    }
+  )
+  primaryKey = {
+    columns = [
+      LogID
+    ]
+    name = "PRIMARY"
+    objectType = primaryKey
+  }
+}
+
+foreignKey "flywayapdev"."inventory_maintenance_log"."inventory_maintenance_log_ibfk_1" {
+  columns = [
+    "FlightID"
+  ]
+  referencedTable = "flywayapdev"."inventory_flight"
+  referencedColumns = [
+    "FlightID"
+  ]
+}
+
+index "flywayapdev"."inventory_maintenance_log"."FlightID" {
+  columns = <
+    {
+      name = FlightID
+    }
+
+  >
+  type = BTREE
+}
+

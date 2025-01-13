@@ -1,0 +1,52 @@
+table "flywayapdev"."customers_customer_feedback" {
+  columns = (
+    column "FeedbackID" {
+      type = int
+      null = NOT NULL
+    }
+    column "CustomerID" {
+      type = int
+    }
+    column "FeedbackDate" {
+      type = datetime
+      default = CURRENT_TIMESTAMP
+    }
+    column "Rating" {
+      type = int
+    }
+    column "Comments" {
+      type = varchar(500)
+    }
+    column "ClientID" {
+      type = int
+    }
+  )
+  primaryKey = {
+    columns = [
+      FeedbackID
+    ]
+    name = "PRIMARY"
+    objectType = primaryKey
+  }
+}
+
+foreignKey "flywayapdev"."customers_customer_feedback"."customers_customer_feedback_ibfk_1" {
+  columns = [
+    "CustomerID"
+  ]
+  referencedTable = "flywayapdev"."customers_customer"
+  referencedColumns = [
+    "CustomerID"
+  ]
+}
+
+index "flywayapdev"."customers_customer_feedback"."CustomerID" {
+  columns = <
+    {
+      name = CustomerID
+    }
+
+  >
+  type = BTREE
+}
+

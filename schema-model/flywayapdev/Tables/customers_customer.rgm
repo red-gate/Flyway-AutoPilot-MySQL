@@ -1,0 +1,51 @@
+table "flywayapdev"."customers_customer" {
+  columns = (
+    column "CustomerID" {
+      type = int
+      null = NOT NULL
+    }
+    column "FirstName" {
+      type = varchar(50)
+      null = NOT NULL
+    }
+    column "LastName" {
+      type = varchar(50)
+      null = NOT NULL
+    }
+    column "Email" {
+      type = varchar(100)
+      null = NOT NULL
+    }
+    column "DateOfBirth" {
+      type = date
+    }
+    column "Phone" {
+      type = varchar(20)
+    }
+    column "Address" {
+      type = varchar(200)
+    }
+    column "ClientID" {
+      type = int
+    }
+  )
+  primaryKey = {
+    columns = [
+      CustomerID
+    ]
+    name = "PRIMARY"
+    objectType = primaryKey
+  }
+}
+
+index "flywayapdev"."customers_customer"."Email" {
+  columns = <
+    {
+      name = Email
+    }
+
+  >
+  type = BTREE
+  unique = UNIQUE
+}
+
